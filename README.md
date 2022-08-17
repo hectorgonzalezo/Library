@@ -10,5 +10,5 @@ This involves using Javascript Objects, reviewing concepts like inheritance and 
 Build as part of "The Odin Project" curriculum.
 
 ## Live Preview
-[https://hectorgonzalezo.github.io/library/](https://hectorgonzalezo.github.io/library/)
+[https://hectorgonzalezo.github.io/Library/](https://hectorgonzalezo.github.io/Library/)
 
