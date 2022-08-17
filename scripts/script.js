@@ -1,6 +1,6 @@
 const root = document.querySelector('html')
 const librarySection = document.querySelector('main')
-const darkModeButton = document.querySelector('#dark-mode-button')
+const darkModeSwitch = document.querySelector('#dark-mode')
 
 //This array will contain all the books
 let myLibrary = []
@@ -45,13 +45,6 @@ function displayBooks(arr = myLibrary){
 displayBooks()
 
 //change to dark mode with button
-darkModeButton.addEventListener('click', () => {
+darkModeSwitch.addEventListener('click', () => {
     root.classList.toggle("dark")
-    //change button text
-    if (darkModeButton.innerText == 'Dark Mode'){
-        darkModeButton.innerText = 'Light Mode'
-    } else {
-        darkModeButton.innerText = 'Dark Mode'
-    }
-}
-    )
+});
