@@ -209,7 +209,7 @@ main {
     box-shadow: 2px 2px 4px black;
 }
 
-.active-button:hover {
+#book-button.active-button:hover {
     background-color: var(--color-contrast-dark);
     color: var(--color-text-book);
     cursor: pointer;
