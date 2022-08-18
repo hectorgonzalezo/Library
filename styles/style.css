@@ -9,7 +9,7 @@
     --color-contrast: rgb(89, 16, 224);
     --color-text-book: white;
     --color-text-header: black;
-    --number-of-book-properties: 4;
+    --num-book-properties: 4;
 }
 
 :root.dark {
@@ -19,7 +19,7 @@
     --color-contrast: rgb(89, 16, 224);
     --color-text-book: black;
     --color-text-header: white;
-    --number-of-book-properties: 4;
+    --num-book-properties: 4;
 }
 
 body {
@@ -121,13 +121,34 @@ main {
 }
 
 .book {
-    height: 200px;
-    width: 200px;
+    height: clamp(200px, calc(8rem + 10vh), 300px);
+    width: clamp(200px, calc(8rem + 10vw), 300px);
     background-color: var(--color-dark);
     color: var(--color-text-book);
+    padding: 1.5rem;
+}
+
+.book > table,
+.book tbody{
+    height: 100%;
+    width: 100%;
+}
+
+.book-table {
     display: grid;
-    grid-template-rows: repeat(var(--number-of-book-properties), 1fr);
-    padding: 1rem;
+    grid-template-rows: repeat(--num-book-properties, 1fr);
+    align-content: space-around;
+    /* justify-items: start; */
+}
+
+.book-table tr {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+}
+
+.book-table td {
+    padding: 5px;
 }
 
 

@@ -14,35 +14,65 @@ function Book(title, author, pages, read) {
 }
 
 
-//takes users input and stores a new book in myLibrary.
-function addBookToLibrary(title, author, pages, read) {
-   const newBook = new Book(title, author, pages, read) 
-   myLibrary.push(newBook)
+//takes users input and stores a new book in the array myLibrary.
+function addBookToArray(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read)
+    myLibrary.push(newBook)
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 310, true)
-addBookToLibrary('Pedro Páramo', 'Juan Rulfo', 128, false)
-addBookToLibrary('La Raza Cósmica', 'José Vasconcelos', 70, true)
+addBookToArray('The Hobbit', 'J.R.R. Tolkien', 310, true)
+addBookToArray('Pedro Páramo', 'Juan Rulfo', 128, false)
+addBookToArray('La Raza Cósmica', 'José Vasconcelos', 70, true)
 
-//adds divs with book information to library section
-function displayBooks(arr = myLibrary){
-    myLibrary.forEach( (book) => {
-        //create book element as div
-        const bookDiv = document.createElement('div');
-        bookDiv.classList.add('book');
-        Object.values(book).forEach( value => {
-            //add each property value to book div
-            const propertyElement = document.createElement('p');
-            propertyElement.textContent = value.toString()
-            bookDiv.appendChild(propertyElement)
+//used to capitalize book properties
+function capitalize(word) {
+    return word.replace(/\w/, (letter) => letter.toUpperCase())
+}
+
+console.log(capitalize('asdfasdf'))
+//Adds book into into a table, appends it to DOM and displays it on webpage.
+function displayBook(book) {
+    //adds divs with book information to library section
+    const bookDiv = document.createElement('div');
+    bookDiv.classList.add('book');
+
+    //creates table
+    const bookTable = document.createElement('table')
+    bookDiv.appendChild(bookTable)
+    const tableBody = document.createElement('tbody')
+    bookTable.appendChild(tableBody)
+    tableBody.classList.add('book-table')
+    for (const property in book) {
+        //create table row
+        const tableRow = document.createElement('tr');
+        tableBody.appendChild(tableRow)
+        //format property to be suitable for display
+        const formattedProperty = `${capitalize(property)}:`;
+        //add info to tableRow
+        [formattedProperty, book[property]].forEach((text) => {
+            const tableData = document.createElement('td');
+            //format booleans to no or yes
+            if (typeof(text) != 'boolean') {
+                tableData.innerText = text;
+            } else {
+                tableData.innerText = book[property] ? 'Yes' : 'No'
+            }
+            tableRow.appendChild(tableData)
         }
         )
-        librarySection.appendChild(bookDiv)
+    }
+    librarySection.appendChild(bookDiv)
+}
+
+//displays all books in list
+function displayAllBooks(arr = myLibrary) {
+    myLibrary.forEach((book) => {
+        //create book element as div
+        displayBook(book)
     }
     );
 }
-
-displayBooks()
+displayAllBooks()
 
 //change to dark mode with button
 darkModeSwitch.addEventListener('click', () => {
