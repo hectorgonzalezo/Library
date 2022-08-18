@@ -11,6 +11,7 @@
     --color-medium: #f97316;
     --color-dark: #9a3412;
     --color-contrast: rgb(147, 146, 211);
+    --color-contrast-dark :rgb(57, 56, 126);
     --color-text-book: white;
     --color-text-header: black;
     --num-book-properties: 4;
@@ -24,6 +25,7 @@
     --color-medium: rgb(189, 186, 186);
     --color-dark: #ffedd5;
     --color-contrast: rgb(57, 56, 126);
+    --color-contrast-dark: rgb(147, 146, 211);
     --color-text-book: black;
     --color-text-header: rgb(241, 230, 230);
 }
@@ -58,7 +60,7 @@ body {
 
 #dark-mode-div {
     position: absolute;
-    right: 7vw;
+    right: 2vw;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -127,6 +129,9 @@ main {
     grid-auto-rows: 1fr;
     gap: 4rem;
     padding: 3rem;
+    justify-items:  center;
+    align-items: center;
+    position: relative;
 }
 
 .book {
@@ -174,6 +179,29 @@ main {
     padding: 5px;
 }
 
+#book-button {
+    height: 5rem;
+    width: 5rem;
+    background-color: var(--color-contrast);
+    font-size: 4rem;
+    border-radius: 4rem;
+    border: outset 3px var(--color-text-header);
+    color: var(--color-text-header);
+    box-shadow: 2px 2px 4px black;
+}
+
+#book-button:hover {
+    background-color: var(--color-contrast-dark);
+    color: var(--color-text-book);
+    cursor: pointer;
+}
+
+#book-button:active{
+    position: relative;
+    left: 2px;
+    top: 1px;
+    box-shadow: 1px 1px 2px black;
+}
 
 
 footer {

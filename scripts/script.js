@@ -65,7 +65,7 @@ function displayBook(book) {
         }
         )
     }
-    librarySection.appendChild(bookDiv)
+    librarySection.prepend(bookDiv)
 }
 
 //displays all books in list
