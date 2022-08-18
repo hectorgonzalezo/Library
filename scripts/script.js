@@ -23,6 +23,7 @@ function addBookToArray(title, author, pages, read) {
 addBookToArray('The Hobbit', 'J.R.R. Tolkien', 310, true)
 addBookToArray('Pedro Páramo', 'Juan Rulfo', 128, false)
 addBookToArray('La Raza Cósmica', 'José Vasconcelos', 70, true)
+addBookToArray('Gödel, Escher, Bach', 'Douglas Hofstadter', 777, true)
 
 //used to capitalize book properties
 function capitalize(word) {
@@ -50,6 +51,8 @@ function displayBook(book) {
         const formattedProperty = `${capitalize(property)}:`;
         //add info to tableRow
         [formattedProperty, book[property]].forEach((text) => {
+            if (text != 'Title:') {
+            
             const tableData = document.createElement('td');
             //format booleans to no or yes
             if (typeof(text) != 'boolean') {
@@ -58,6 +61,7 @@ function displayBook(book) {
                 tableData.innerText = book[property] ? 'Yes' : 'No'
             }
             tableRow.appendChild(tableData)
+            }
         }
         )
     }

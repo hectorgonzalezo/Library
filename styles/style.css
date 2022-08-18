@@ -1,15 +1,22 @@
 @import "./reset.css";
 
 
+@font-face {
+    font-family: Sriracha;
+    src: url(../fonts/sriracha-regular-webfont.woff)
+}
 
 :root {
     --color-light: #ffedd5;
     --color-medium: #f97316;
     --color-dark: #9a3412;
-    --color-contrast: rgb(89, 16, 224);
+    --color-contrast: rgb(147, 146, 211);
     --color-text-book: white;
     --color-text-header: black;
     --num-book-properties: 4;
+    font-family: 'Sriracha', cursive;
+
+    
 }
 
 :root.dark {
@@ -19,7 +26,6 @@
     --color-contrast: rgb(89, 16, 224);
     --color-text-book: black;
     --color-text-header: white;
-    --num-book-properties: 4;
 }
 
 body {
@@ -38,12 +44,15 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    padding: 2rem;
 }
 
 #title-section h1 {
-    font-size: 2rem;
+    font-size: 4rem;
     text-align: center;
     font-weight: bold;
+    letter-spacing: 0.5rem;
+    text-shadow: 1px 1px 2px var(--color-dark);
     color: var(--color-text-header)
 }
 
@@ -113,10 +122,10 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 1fr;
     grid-auto-rows: 1fr;
-    gap: 2rem;
+    gap: 4rem;
     padding: 3rem;
 }
 
@@ -126,6 +135,12 @@ main {
     background-color: var(--color-dark);
     color: var(--color-text-book);
     padding: 1.5rem;
+    border-radius: 0.7rem;
+    border-left: 0.7rem solid;
+    border-color: var(--color-contrast);
+    box-shadow: 4px 4px 6px grey;
+
+    font-size: 1.4rem;
 }
 
 .book > table,
@@ -141,15 +156,24 @@ main {
     /* justify-items: start; */
 }
 
+.book-table tr:first-child{
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    text-shadow: 1px 1px 3px var(--color-contrast);
+}
+
 .book-table tr {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 80px 1fr;
     gap: 1rem;
 }
+
 
 .book-table td {
     padding: 5px;
 }
+
 
 
 footer {
@@ -160,9 +184,10 @@ footer {
     height: 50px;
     ;
     width: 100vw;
-    gap: 1vw;
+    gap: 2vw;
     background-color: var(--color-dark);
     color: var(--color-text-book);
+    font-family :  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1.5rem;
 }
 
