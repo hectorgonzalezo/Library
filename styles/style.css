@@ -20,12 +20,12 @@
 }
 
 :root.dark {
-    --color-light: rgba(0, 0, 0, 0.738);
-    --color-medium: grey;
+    --color-light: rgba(0, 0, 0, 0.858);
+    --color-medium: rgb(189, 186, 186);
     --color-dark: #ffedd5;
-    --color-contrast: rgb(89, 16, 224);
+    --color-contrast: rgb(57, 56, 126);
     --color-text-book: black;
-    --color-text-header: white;
+    --color-text-header: rgb(241, 230, 230);
 }
 
 body {
