@@ -1,6 +1,10 @@
 const root = document.querySelector('html')
+const body = document.querySelector('#page-body')
 const librarySection = document.querySelector('main')
 const darkModeSwitch = document.querySelector('#dark-mode')
+const darkModeSwitchDiv = document.querySelector('#dark-mode-switch-div')
+const bookButton = document.querySelector('#book-button')
+const popUp = document.querySelector('#pop-up')
 
 //This array will contain all the books
 let myLibrary = []
@@ -82,3 +86,15 @@ displayAllBooks()
 darkModeSwitch.addEventListener('click', () => {
     root.classList.toggle("dark")
 });
+
+
+//show popup when pressing "+" button
+bookButton.addEventListener('click', () => {
+    popUp.classList.toggle('visible-pop-up');
+    body.classList.toggle('greyout');
+    //disable button so that it can't be pressed multiple times
+    bookButton.disabled = true;
+    bookButton.classList.toggle('active-button')
+    darkModeSwitch.disabled = true;
+    darkModeSwitchDiv.classList.toggle('inactive-switch')
+})
