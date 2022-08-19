@@ -24,7 +24,7 @@
     --num-book-properties: 4;
     font-family: 'Sriracha', cursive;
     --book-height: clamp(200px, calc(8rem + 10vh), 300px);
-    --book-width: clamp(200px, calc(8rem + 10vw), 300px);
+    --book-width: clamp(220px, calc(8rem + 10vw), 300px);
     --book-padding: 1.2rem;
 }
 
@@ -159,7 +159,7 @@ main {
 }
 
 .book {
-    height: var(--book-height);
+    height: max(var(--book-height) auto);
     width: var(--book-width);
     background-color: var(--color-dark);
     color: var(--color-text-book);
@@ -264,12 +264,13 @@ body #pop-up {
 }
 
 #pop-up input:invalid:not(:placeholder-shown) {
-    background-color: rgb(244, 53, 53);
+    box-shadow: 0 0 5px 5px red;
 }
 #pop-up form input:not(input[type="checkbox"]) {
     height: 70%;
     border-radius: 0.7rem;
     padding-left: 0.3rem;
+    padding-right: 0.5rem;
     font-size: 1.2rem;
     color: var(--color-form-fields-text)
 }
@@ -311,7 +312,7 @@ input[type="checkbox"]:checked::before {
 }
 
 
-#new-pages {
+#pages {
     width: 5rem;
 }
 

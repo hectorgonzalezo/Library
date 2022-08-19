@@ -3,8 +3,10 @@ const body = document.querySelector('#page-body')
 const librarySection = document.querySelector('main')
 const darkModeSwitch = document.querySelector('#dark-mode')
 const darkModeSwitchDiv = document.querySelector('#dark-mode-switch-div')
-const bookButton = document.querySelector('#book-button')
+const newBookButton = document.querySelector('#book-button')
 const popUp = document.querySelector('#pop-up')
+const addBookButton = document.querySelector('#add-book-button')
+const addBookForm = document.querySelector('#add-book-form');
 
 //This array will contain all the books
 let myLibrary = []
@@ -34,7 +36,6 @@ function capitalize(word) {
     return word.replace(/\w/, (letter) => letter.toUpperCase())
 }
 
-console.log(capitalize('asdfasdf'))
 //Adds book into into a table, appends it to DOM and displays it on webpage.
 function displayBook(book) {
     //adds divs with book information to library section
@@ -56,15 +57,15 @@ function displayBook(book) {
         //add info to tableRow
         [formattedProperty, book[property]].forEach((text) => {
             if (text != 'Title:') {
-            
-            const tableData = document.createElement('td');
-            //format booleans to no or yes
-            if (typeof(text) != 'boolean') {
-                tableData.innerText = text;
-            } else {
-                tableData.innerText = book[property] ? 'Yes' : 'No'
-            }
-            tableRow.appendChild(tableData)
+
+                const tableData = document.createElement('td');
+                //format booleans to no or yes
+                if (typeof (text) != 'boolean') {
+                    tableData.innerText = text;
+                } else {
+                    tableData.innerText = book[property] ? 'Yes' : 'No'
+                }
+                tableRow.appendChild(tableData)
             }
         }
         )
@@ -89,12 +90,54 @@ darkModeSwitch.addEventListener('click', () => {
 
 
 //show popup when pressing "+" button
-bookButton.addEventListener('click', () => {
+newBookButton.addEventListener('click', togglePopup)
+
+
+//add book to library with button on pop-up
+addBookButton.addEventListener('click', (e) => {
+    //prevents button from submitting
+    e.preventDefault();
+
+    if (addBookForm.checkValidity()) {
+        //extract data from form and make it a FormData
+        const formData = new FormData(addBookForm)
+        const addBookData = Object.fromEntries(formData.entries())
+        //create book from data
+        const newBook = Object.assign(new Book(), addBookData);
+
+        const correctedBook = correctBookData(newBook);
+        console.log(correctedBook)
+
+        displayBook(correctedBook);
+        addBookForm.reset();
+        togglePopup()
+
+    }
+})
+
+//correct value data types for number of pages and read.
+function correctBookData(book) {
+    const newBook = book;
+    newBook.pages = parseInt(newBook.pages) //to number
+    //to boolean
+    if (newBook.read == undefined) {
+        newBook.read = false;
+    } else {
+        newBook.read = true;
+    };
+    return newBook
+}
+
+function togglePopup() {
     popUp.classList.toggle('visible-pop-up');
     body.classList.toggle('greyout');
-    //disable button so that it can't be pressed multiple times
-    bookButton.disabled = true;
-    bookButton.classList.toggle('active-button')
+    newBookButton.classList.toggle('active-button');
+    darkModeSwitchDiv.classList.toggle('inactive-switch');
+    if (newBookButton.disabled){
+        newBookButton.disabled = false;
+        darkModeSwitch.disabled = false;
+    } else {
+    newBookButton.disabled = true;
     darkModeSwitch.disabled = true;
-    darkModeSwitchDiv.classList.toggle('inactive-switch')
-})
+    }
+}
