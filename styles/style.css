@@ -23,7 +23,7 @@
     --color-form-fields-text: black;
     --num-book-properties: 4;
     font-family: 'Sriracha', cursive;
-    --book-height: clamp(200px, calc(8rem + 10vh), 300px);
+    --book-height: clamp(220px, calc(8rem + 10vh), 300px);
     --book-width: clamp(220px, calc(8rem + 10vw), 300px);
     --book-padding: 1.2rem;
 }
@@ -49,7 +49,6 @@ body {
     display: grid;
     height: 100vh;
     grid-template-rows: 2fr 20fr 1fr;
-
 }
 
 
@@ -159,7 +158,8 @@ main {
 }
 
 .book {
-    height: max(var(--book-height) auto);
+    /* height: var(--book-height); */
+    min-height: var(--book-height);
     width: var(--book-width);
     background-color: var(--color-dark);
     color: var(--color-text-book);
@@ -169,15 +169,23 @@ main {
     border-color: var(--color-contrast);
     box-shadow: 4px 4px 6px grey;
     font-size: 1.4rem;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
 }
+
 
 .book>table,
 .book tbody {
+    min-height: var(--book-height);
     height: 100%;
     width: 100%;
 }
 
 .book-table {
+    height: 100%;
     display: grid;
     grid-template-rows: repeat(--num-book-properties, 1fr);
     align-content: space-around;
@@ -200,6 +208,8 @@ main {
 
 .book-table td {
     padding: 5px;
+    min-width: 5rem;
+    max-width: calc(var(--book-width) - var(--book-padding));
 }
 
 #book-button {
@@ -260,12 +270,13 @@ body #pop-up {
 
 #pop-up input {
     background-color: var(--color-form-fields);
-    border: solid 1px var(--color-text-header);   
+    border: solid 1px var(--color-text-header);
 }
 
 #pop-up input:invalid:not(:placeholder-shown) {
     box-shadow: 0 0 5px 5px red;
 }
+
 #pop-up form input:not(input[type="checkbox"]) {
     height: 70%;
     border-radius: 0.7rem;

@@ -29,7 +29,7 @@ function addBookToArray(title, author, pages, read) {
 addBookToArray('The Hobbit', 'J.R.R. Tolkien', 310, true)
 addBookToArray('Pedro Páramo', 'Juan Rulfo', 128, false)
 addBookToArray('La Raza Cósmica', 'José Vasconcelos', 70, true)
-addBookToArray('Gödel, Escher, Bach', 'Douglas Hofstadter', 777, true)
+addBookToArray('Gödel, Escher, Bach' + 'aslkjfa, ;lskjdfal, ;sjdf;lakjsf;lakjs;lkdfja;lsdkjf;alskdfasfd', 'Douglas Hofstadter', 777, true)
 
 //used to capitalize book properties
 function capitalize(word) {
