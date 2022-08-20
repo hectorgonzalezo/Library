@@ -39,15 +39,21 @@
 
 
 :root {
-    --color-light: #ffedd5;
+    /* --color-light: #ffedd5;
     --color-medium: #f97316;
     --color-dark: #9a3412;
     --color-contrast: rgb(147, 146, 211);
-    --color-contrast-dark: rgb(57, 56, 126);
+    --color-contrast-dark: rgb(57, 56, 126); */
+    --color-light: #f1f5f9;
+    --color-dark: #64748b;
+    --color-contrast: #f9a916;
+    --color-contrast-dark: #ad4b05;
     --color-text-book: white;
     --color-text-header: black;
     --color-form-fields: var(--color-light);
     --color-form-fields-text: black;
+    --color-tick: green;
+    --color-placeholder: grey;
     --num-book-properties: 4;
     font-family: 'Sriracha', cursive;
     --book-height: clamp(220px, calc(8rem + 10vh), 300px);
@@ -56,22 +62,32 @@
     --trash-bin-image: url('../images/delete-white.png');
     --read-image: url('../images/read-white.png');
     --not-read-image: url('../images/not-read-white.png');
-    --read-background: green;
-    --not-read-background: red;
+    --read-background: rgb(0, 112, 0);
+    --not-read-background: rgb(253, 0, 0);
 }
 
 :root.dark {
-    --color-light: rgba(0, 0, 0, 0.858);
+    /* --color-light: rgba(0, 0, 0, 0.858);
     --color-medium: rgb(189, 186, 186);
     --color-dark: #ffedd5;
     --color-contrast: rgb(57, 56, 126);
-    --color-contrast-dark: rgb(147, 146, 211);
+    --color-contrast-dark: rgb(147, 146, 211); */
+    --color-light: #334155;
+    --color-medium: #64748b;
+    --color-dark: #cbd5e1;
+    --color-contrast:#ad4b05; 
+    --color-contrast-dark: #f97316;
     --color-text-book: black;
     --color-text-header: rgb(241, 230, 230);
     --color-form-fields: var(--color-medium);
+    --color-form-fields-text: white;
+    --color-tick: rgb(44, 215, 44);
+    --color-placeholder: lightgrey;
     --trash-bin-image: url('../images/delete.png');
     --read-image: url('../images/read.png');
-    --not-read-image: url('../images/not-read.png')
+    --not-read-image: url('../images/not-read.png');
+    --read-background: rgb(90, 247, 63);
+    --not-read-background: rgb(245, 129, 129);
 }
 
 body {
@@ -263,14 +279,12 @@ main {
     display: grid;
     grid-template-rows: repeat(--num-book-properties, 1fr);
     align-content: space-around;
-    /* justify-items: start; */
 }
 
 .book-table tr:first-child {
     display: flex;
     justify-content: center;
     font-size: 2rem;
-    text-shadow: 1px 1px 3px var(--color-contrast);
 }
 
 .book-table tr {
@@ -352,7 +366,9 @@ body #pop-up {
 #pop-up input[type="text"] {
     width: 90%;
 }
-
+::placeholder{
+    color: var(--color-placeholder)
+}
 #pop-up input:invalid:not(:placeholder-shown) {
     box-shadow: 0 0 5px 5px red;
 }
@@ -379,8 +395,10 @@ input[type="checkbox"] {
     /* Adjusts the position of the checkboxes on the text baseline */
     vertical-align: -2px;
     /* Set here so that Windows' High-Contrast Mode can override */
-    color: green;
+    color: var(--color-tick);
 }
+
+
 
 input[type="checkbox"]::before {
     content: "✔";
