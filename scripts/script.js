@@ -58,20 +58,18 @@ function displayBook(book) {
         //add info to tableRow
         [formattedProperty, book[property]].forEach((text) => {
             if (text != 'Title:') {
-
                 const tableData = document.createElement('td');
-                //format booleans to no or yes
+                //format "Read" booleans to image
                 if (typeof (text) != 'boolean') {
                     tableData.innerText = text;
                 } else {
-                    tableData.innerText = book[property] ? 'Yes' : 'No'
+                    addReadButton(tableData, book)
                 }
                 tableRow.appendChild(tableData)
             }
         }
         )
     }
-
     addDeleteButton(bookDiv, book)
 
     librarySection.prepend(bookDiv)
@@ -86,6 +84,18 @@ function addDeleteButton (location, obj) {
     trashBin.addEventListener('click', () => {
         removeBook(location, obj)
     })
+}
+
+function addReadButton (location, book) {
+   //make space for delete button
+    const imageRead = document.createElement('div');
+    imageRead.classList.add('image-read')
+    book.read ? imageRead.classList.add('read-it') : null;
+    location.appendChild(imageRead)
+   //add button functionality
+   imageRead.addEventListener('click', (e) => {
+       imageRead.classList.toggle('read-it')
+   }) 
 }
 
 function removeBook(book, obj) {

@@ -53,7 +53,11 @@
     --book-height: clamp(200px, calc(8rem + 10vh), 300px);
     --book-width: clamp(220px, calc(8rem + 10vw), 300px);
     --book-padding: 1.2rem;
-    --trash-bin-image: url('../images/delete-white.png')
+    --trash-bin-image: url('../images/delete-white.png');
+    --read-image: url('../images/read-white.png');
+    --not-read-image: url('../images/not-read-white.png');
+    --read-background: green;
+    --not-read-background: red;
 }
 
 :root.dark {
@@ -65,7 +69,9 @@
     --color-text-book: black;
     --color-text-header: rgb(241, 230, 230);
     --color-form-fields: var(--color-medium);
-    --trash-bin-image: url('../images/delete.png')
+    --trash-bin-image: url('../images/delete.png');
+    --read-image: url('../images/read.png');
+    --not-read-image: url('../images/not-read.png')
 }
 
 body {
@@ -215,6 +221,30 @@ main {
     animation: shake 0.5s;
 }
 
+.image-read {
+    background-image: var(--not-read-image);
+    background-repeat: no-repeat;
+    background-color: var(--not-read-background);
+    height: 24px;
+    width: 24px;
+    border: 1px;
+    border-style: dotted;
+    border-radius: 0.5rem;
+}
+
+.image-read:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1px 2px var(--not-read-background);
+}
+.image-read.read-it {
+    background-image: var(--read-image);
+    background-color: var(--read-background);
+}
+
+.image-read.read-it:hover {
+    box-shadow: 0 0 1px 2px var(--read-background);
+}
+
 .book>table,
 .book tbody {
     height: 100%;
@@ -245,6 +275,8 @@ main {
 .book-table td {
     padding: 5px;
 }
+
+
 
 #book-button {
     height: 5rem;
