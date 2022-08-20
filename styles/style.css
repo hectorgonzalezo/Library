@@ -251,7 +251,7 @@ main {
 .active-button:active {
     position: relative;
     left: 2px;
-    top: 1px;
+    top: 1px;5
     box-shadow: 1px 1px 2px black;
 }
 
@@ -349,22 +349,32 @@ input[type="checkbox"]:checked::before {
     width: 5rem;
 }
 
-#add-book-button {
-    grid-column: 1 / -1;
+#add-book-button,
+#close-pop-up {
     border-radius: 0.5rem;
-    justify-self: center;
-    width: 150px;
-    padding: 5px;
     background-color: var(--color-contrast-dark);
     color: var(--color-text-book);
     font-size: 1.2rem;
     font-weight: bold;
     border-style: none;
     box-shadow: 2px 2px 4px black;
-
 }
 
-#add-book-button:hover {
+#add-book-button {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 150px;
+    padding: 5px;
+}
+
+#close-pop-up {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+#add-book-button:hover,
+#close-pop-up:hover {
     background-color: var(--color-contrast);
     color: var(--color-text-header);
     cursor: pointer;
@@ -377,6 +387,11 @@ input[type="checkbox"]:checked::before {
     box-shadow: 1px 1px 2px black;
 }
 
+#close-pop-up:active {
+    top: 11px;
+    right: 14px;
+    box-shadow: 1px 1px 2px black; 
+}
 
 footer {
     margin-top: auto;

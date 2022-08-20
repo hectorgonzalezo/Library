@@ -6,8 +6,8 @@ const darkModeSwitchDiv = document.querySelector('#dark-mode-switch-div')
 const newBookButton = document.querySelector('#book-button')
 const popUp = document.querySelector('#pop-up')
 const addBookButton = document.querySelector('#add-book-button')
-const addBookForm = document.querySelector('#add-book-form');
-let books = document.querySelector('main').children
+const closePopUpButton = document.querySelector('#close-pop-up')
+const addBookForm = document.querySelector('#add-book-form')
 
 //This object will contain all the books
 let myLibrary = {}
@@ -119,6 +119,9 @@ function correctBookData(book) {
 }
 
 function togglePopup() {
+    //clear form
+    addBookForm.reset();
+    
     popUp.classList.toggle('visible-pop-up');
     body.classList.toggle('greyout');
     newBookButton.classList.toggle('active-button');
@@ -157,9 +160,9 @@ addBookButton.addEventListener('click', (e) => {
         const correctedBook = correctBookData(newBook);
 
         displayBook(correctedBook);
-        addBookForm.reset();
         togglePopup()
         myLibrary[correctedBook['title']] = correctedBook
     }
 })
 
+closePopUpButton.addEventListener('click', () => {togglePopup()})
