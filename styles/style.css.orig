@@ -203,11 +203,13 @@ main {
     border-color: var(--color-contrast);
     box-shadow: 4px 4px 6px grey;
     font-size: 1.4rem;
+<<<<<<< HEAD
     word-wrap: break-word;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
+=======
     display: flex;
     flex-direction: column;
 }
@@ -248,6 +250,7 @@ main {
 
 .image-read.read-it:hover {
     box-shadow: 0 0 1px 2px var(--read-background);
+>>>>>>> book-buttons
 }
 
 
