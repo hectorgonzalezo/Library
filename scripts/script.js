@@ -9,8 +9,8 @@ const addBookButton = document.querySelector('#add-book-button')
 const addBookForm = document.querySelector('#add-book-form');
 let books = document.querySelector('main').children
 
-//This array will contain all the books
-let myLibrary = []
+//This object will contain all the books
+let myLibrary = {}
 
 //object constructor for books
 function Book(title, author, pages, read) {
@@ -24,7 +24,7 @@ function Book(title, author, pages, read) {
 //takes users input and stores a new book in the array myLibrary.
 function addBookToArray(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read)
-    myLibrary.push(newBook)
+    myLibrary[title] = newBook;
 }
 
 addBookToArray('The Hobbit', 'J.R.R. Tolkien', 310, true)
@@ -71,56 +71,39 @@ function displayBook(book) {
         }
         )
     }
-    //make space for delete button
-    const trashBin = document.createElement('span')
-    trashBin.classList.add('trash-bin')
-    bookDiv.appendChild(trashBin)
-    trashBin.addEventListener('click', (e) => {console.log(e)})
+
+    addDeleteButton(bookDiv, book)
 
     librarySection.prepend(bookDiv)
 }
 
+function addDeleteButton (location, obj) {
+    //make space for delete button
+    const trashBin = document.createElement('span')
+    trashBin.classList.add('trash-bin')
+    location.appendChild(trashBin)
+    //add button functionality
+    trashBin.addEventListener('click', () => {
+        removeBook(location, obj)
+    })
+}
+
+function removeBook(book, obj) {
+    //remove from Dom
+    librarySection.removeChild(book);
+    //remove from myLibrary object
+    delete myLibrary[obj['title']]
+}
+
 //displays all books in list
-function displayAllBooks(arr = myLibrary) {
-    myLibrary.forEach((book) => {
+function displayAllBooks(obj = myLibrary) {
+    Object.keys(obj).forEach((book, i) => {
         //create book element as div
-        displayBook(book)
+        displayBook(obj[book], i)
     }
     );
 }
 displayAllBooks()
-
-//change to dark mode with button
-darkModeSwitch.addEventListener('click', () => {
-    root.classList.toggle("dark")
-});
-
-
-//show popup when pressing "+" button
-newBookButton.addEventListener('click', togglePopup)
-
-
-//add book to library with button on pop-up
-addBookButton.addEventListener('click', (e) => {
-    //prevents button from submitting
-    e.preventDefault();
-
-    if (addBookForm.checkValidity()) {
-        //extract data from form and make it a FormData
-        const formData = new FormData(addBookForm)
-        const addBookData = Object.fromEntries(formData.entries())
-        //create book from data
-        const newBook = Object.assign(new Book(), addBookData);
-
-        const correctedBook = correctBookData(newBook);
-        console.log(correctedBook)
-
-        displayBook(correctedBook);
-        addBookForm.reset();
-        togglePopup()
-
-    }
-})
 
 //correct value data types for number of pages and read.
 function correctBookData(book) {
@@ -148,3 +131,35 @@ function togglePopup() {
     darkModeSwitch.disabled = true;
     }
 }
+
+//change to dark mode with button
+darkModeSwitch.addEventListener('click', () => {
+    root.classList.toggle("dark")
+});
+
+
+//show popup when pressing "+" button
+newBookButton.addEventListener('click', togglePopup)
+
+
+//add book to library with button on pop-up
+addBookButton.addEventListener('click', (e) => {
+    //prevents button from submitting
+    e.preventDefault();
+
+    if (addBookForm.checkValidity()) {
+        //extract data from form and make it a FormData
+        const formData = new FormData(addBookForm)
+        const addBookData = Object.fromEntries(formData.entries())
+        //create book from data
+        const newBook = Object.assign(new Book(), addBookData);
+
+        const correctedBook = correctBookData(newBook);
+
+        displayBook(correctedBook);
+        addBookForm.reset();
+        togglePopup()
+        myLibrary[correctedBook['title']] = correctedBook
+    }
+})
+

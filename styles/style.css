@@ -13,6 +13,10 @@
     #dark-mode-div {
         top : 12vh;
     }
+
+    body #pop-up {
+        background-color: red;
+    }
   }
 /* * {
     outline: dashed red;
