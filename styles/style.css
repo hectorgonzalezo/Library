@@ -347,13 +347,10 @@ body #pop-up {
 #pop-up input {
     background-color: var(--color-form-fields);
     border: solid 1px var(--color-text-header);
-<<<<<<< HEAD
-=======
 }
 
 #pop-up input[type="text"] {
     width: 90%;
->>>>>>> book-buttons
 }
 
 #pop-up input:invalid:not(:placeholder-shown) {
