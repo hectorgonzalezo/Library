@@ -7,6 +7,7 @@ const newBookButton = document.querySelector('#book-button')
 const popUp = document.querySelector('#pop-up')
 const addBookButton = document.querySelector('#add-book-button')
 const addBookForm = document.querySelector('#add-book-form');
+let books = document.querySelector('main').children
 
 //This array will contain all the books
 let myLibrary = []
@@ -70,6 +71,12 @@ function displayBook(book) {
         }
         )
     }
+    //make space for delete button
+    const trashBin = document.createElement('span')
+    trashBin.classList.add('trash-bin')
+    bookDiv.appendChild(trashBin)
+    trashBin.addEventListener('click', (e) => {console.log(e)})
+
     librarySection.prepend(bookDiv)
 }
 
