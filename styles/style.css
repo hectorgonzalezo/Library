@@ -7,7 +7,7 @@
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     /* For mobile phones: */
 
     #dark-mode-div {
@@ -15,7 +15,22 @@
     }
 
     body #pop-up {
-        background-color: red;
+        --pop-up-height: calc(var(--book-height) * 1.5);
+        --pop-up-width: calc(var(--book-width) * 1.5);
+        height: var(--pop-up-height);
+        width: var(--pop-up-width);
+        background-color: var(--color-light);
+        color: var(--color-text-book);
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        display: none;
+        opacity: 1;
+    }
+
+    #pop-up.visible-pop-up {
+        bottom: -50%;
     }
   }
 /* * {
@@ -251,7 +266,7 @@ main {
 .active-button:active {
     position: relative;
     left: 2px;
-    top: 1px;5
+    top: 1px;
     box-shadow: 1px 1px 2px black;
 }
 
