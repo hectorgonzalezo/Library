@@ -248,9 +248,11 @@ main {
     background-color: var(--not-read-background);
     height: 24px;
     width: 24px;
-    border: 1px;
-    border-style: dotted;
+    border: 2px;
+    border-style: solid;
     border-radius: 0.5rem;
+    background-origin: content-box;
+    padding: 3px;
 }
 
 .image-read:hover {
