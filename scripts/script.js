@@ -94,7 +94,8 @@ function addReadButton (location, book) {
     location.appendChild(imageRead)
    //add button functionality
    imageRead.addEventListener('click', (e) => {
-       imageRead.classList.toggle('read-it')
+       imageRead.classList.toggle('read-it');
+       book.read = book.read ? false : true;//toggle read status on object with button
    }) 
 }
 

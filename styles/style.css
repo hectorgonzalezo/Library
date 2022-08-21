@@ -62,8 +62,8 @@
     --trash-bin-image: url('../images/delete-white.png');
     --read-image: url('../images/read-white.png');
     --not-read-image: url('../images/not-read-white.png');
-    --read-background: rgb(0, 112, 0);
-    --not-read-background: rgb(253, 0, 0);
+    --read-background: rgb(3, 85, 3);
+    --not-read-background: rgb(156, 2, 2);
 }
 
 :root.dark {
@@ -86,8 +86,8 @@
     --trash-bin-image: url('../images/delete.png');
     --read-image: url('../images/read.png');
     --not-read-image: url('../images/not-read.png');
-    --read-background: rgb(90, 247, 63);
-    --not-read-background: rgb(245, 129, 129);
+    --read-background: rgb(19, 248, 65);
+    --not-read-background: rgb(223, 94, 94);
 }
 
 body {
@@ -268,6 +268,12 @@ main {
     box-shadow: 0 0 1px 2px var(--read-background);
 }
 
+.image-read:active {
+    position: relative;
+    left: 1px;
+    top: 1px;
+    box-shadow: -1px -1px 2px black;
+}
 
 .book>table,
 .book tbody {
