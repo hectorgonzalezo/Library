@@ -20,114 +20,118 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-
-//takes users input and stores a new book in the array myLibrary.
-function addBookToArray(title, author, pages, read) {
-    const newBook = new Book(title, author, pages, read)
-    myLibrary[title] = newBook;
-}
-
-addBookToArray('The Hobbit', 'J.R.R. Tolkien', 310, true)
-addBookToArray('Pedro Páramo', 'Juan Rulfo', 128, false)
-addBookToArray('La Raza Cósmica', 'José Vasconcelos', 70, true)
-addBookToArray("The principles of Object-Oriented Javascript", 'Nicholas C. Zakas', 112, false)
-
-//used to capitalize book properties
-function capitalize(word) {
-    return word.replace(/\w/, (letter) => letter.toUpperCase())
+//stores book in myLibrary object
+Book.prototype.addToLibrary = function() {
+    myLibrary[this.title] = this
 }
 
 //Adds book into into a table, appends it to DOM and displays it on webpage.
-function displayBook(book) {
-    //adds divs with book information to library section
-    const bookDiv = document.createElement('div');
-    bookDiv.classList.add('book');
+Book.prototype.display = function() {
+   //adds divs with book information to library section
+   const bookDiv = document.createElement('div');
+   bookDiv.classList.add('book');
 
-    //creates table
-    const bookTable = document.createElement('table')
-    bookDiv.appendChild(bookTable)
-    const tableBody = document.createElement('tbody')
-    bookTable.appendChild(tableBody)
-    tableBody.classList.add('book-table')
-    for (const property in book) {
-        //create table row
-        const tableRow = document.createElement('tr');
-        tableBody.appendChild(tableRow)
-        //format property to be suitable for display
-        const formattedProperty = `${capitalize(property)}:`;
-        //add info to tableRow
-        [formattedProperty, book[property]].forEach((text) => {
-            if (text != 'Title:') {
-                const tableData = document.createElement('td');
-                //format "Read" booleans to image
-                if (typeof (text) != 'boolean') {
-                    tableData.innerText = text;
-                } else {
-                    addReadButton(tableData, book)
-                }
-                tableRow.appendChild(tableData)
-            }
-        }
-        )
-    }
-    addDeleteButton(bookDiv, book)
+   //creates table
+   const bookTable = document.createElement('table')
+   bookDiv.appendChild(bookTable)
+   const tableBody = document.createElement('tbody')
+   bookTable.appendChild(tableBody)
+   tableBody.classList.add('book-table')
+   for (const property in this) {
+       if (this.hasOwnProperty(property)){//dont display prototype properties
+       //create table row
+       const tableRow = document.createElement('tr');
+       tableBody.appendChild(tableRow)
+       //format property to be suitable for display
+       const formattedProperty = `${capitalize(property)}:`;
+       //add info to tableRow
+       [formattedProperty, this[property]].forEach((text) => {
+           if (text != 'Title:') {
+               const tableData = document.createElement('td');
+               //format "Read" booleans to image
+               if (typeof (text) != 'boolean') {
+                   tableData.innerText = text;
+               } else {
+                   this.addReadButton(tableData)
+               }
+               tableRow.appendChild(tableData)
+           }
+       }
+       )
+   }
+   }
+   this.addDeleteButton(bookDiv)
 
-    librarySection.prepend(bookDiv)
+   librarySection.prepend(bookDiv)
 }
 
-function addDeleteButton (location, obj) {
+Book.prototype.addDeleteButton = function(location) {
     //make space for delete button
     const trashBin = document.createElement('span')
     trashBin.classList.add('trash-bin')
     location.appendChild(trashBin)
     //add button functionality
     trashBin.addEventListener('click', () => {
-        removeBook(location, obj)
+        this.remove(location)
     })
 }
 
-function addReadButton (location, book) {
-   //make space for delete button
-    const imageRead = document.createElement('div');
-    imageRead.classList.add('image-read')
-    book.read ? imageRead.classList.add('read-it') : null;
-    location.appendChild(imageRead)
-   //add button functionality
-   imageRead.addEventListener('click', (e) => {
-       imageRead.classList.toggle('read-it');
-       book.read = book.read ? false : true;//toggle read status on object with button
-   }) 
-}
-
-function removeBook(book, obj) {
+Book.prototype.remove = function(book) {
     //remove from Dom
     librarySection.removeChild(book);
     //remove from myLibrary object
-    delete myLibrary[obj['title']]
+    delete myLibrary[this['title']]
 }
 
+Book.prototype.addReadButton = function (location) {
+    //make space for delete button
+     const imageRead = document.createElement('div');
+     imageRead.classList.add('image-read')
+     this.read ? imageRead.classList.add('read-it') : null;
+     location.appendChild(imageRead)
+    //add button functionality
+    imageRead.addEventListener('click', (e) => {
+        imageRead.classList.toggle('read-it');
+        this.read = this.read ? false : true;//toggle read status on object with button
+    }) 
+ }
+
+//correct value data types for number of pages and read.
+Book.prototype.correctData = function () {
+    this.pages = parseInt(this.pages) //to number
+    //to boolean
+    if (this.read == undefined) {
+        this.read = false;
+    } else {
+        this.read = true;
+    };
+    return this
+}
+
+//used to capitalize book properties
+function capitalize(word) {
+    return word.replace(/\w/, (letter) => letter.toUpperCase())
+}
+
+
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 310, true).addToLibrary();
+const pedroParamo = new Book('Pedro Páramo', 'Juan Rulfo', 128, false).addToLibrary();
+const razaCosmica = new Book('La Raza Cósmica', 'José Vasconcelos', 70, true).addToLibrary();
+const principles = new Book("The principles of Object-Oriented Javascript", 'Nicholas C. Zakas', 112, false).addToLibrary();
+
+
 //displays all books in list
-function displayAllBooks(obj = myLibrary) {
-    Object.keys(obj).forEach((book, i) => {
-        //create book element as div
-        displayBook(obj[book], i)
+function displayAllBooks(library = myLibrary) {
+
+    Object.keys(myLibrary).forEach( (book) => {
+        console.log(library[book])
+        library[book].display()
     }
-    );
+    )
 }
 displayAllBooks()
 
-//correct value data types for number of pages and read.
-function correctBookData(book) {
-    const newBook = book;
-    newBook.pages = parseInt(newBook.pages) //to number
-    //to boolean
-    if (newBook.read == undefined) {
-        newBook.read = false;
-    } else {
-        newBook.read = true;
-    };
-    return newBook
-}
+
 
 function togglePopup() {
     //clear form
@@ -168,9 +172,9 @@ addBookButton.addEventListener('click', (e) => {
         //create book from data
         const newBook = Object.assign(new Book(), addBookData);
 
-        const correctedBook = correctBookData(newBook);
+        const correctedBook = newBook.correctData();
 
-        displayBook(correctedBook);
+        correctedBook.display();
         togglePopup()
         myLibrary[correctedBook['title']] = correctedBook
     }
