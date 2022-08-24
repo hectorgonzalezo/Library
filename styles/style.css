@@ -253,6 +253,7 @@ main {
     border-radius: 0.5rem;
     background-origin: content-box;
     padding: 3px;
+    z-index: 0;
 }
 
 .image-read:hover {
@@ -319,6 +320,9 @@ main {
     border: outset 3px var(--color-text-header);
     color: var(--color-text-header);
     box-shadow: 2px 2px 4px black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #book-button.active-button:hover {
