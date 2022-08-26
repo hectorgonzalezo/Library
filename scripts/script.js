@@ -1,4 +1,5 @@
 
+const DOM = class {
 root = document.querySelector('html');
 body = document.querySelector('#page-body');
 librarySection = document.querySelector('main');
@@ -12,49 +13,51 @@ addBookForm = document.querySelector('#add-book-form');
 
 
 //displays all books in list
-function displayAllBooks(library = Book.myLibrary) {
+displayAllBooks(library = Book.myLibrary) {
     Object.keys(Book.myLibrary).forEach((book) => {
         library[book].display();
     }
     )
 };
 
-function togglePopup() {
-    //clear form
-    addBookForm.reset();
 
-    popUp.classList.toggle('visible-pop-up');
-    body.classList.toggle('greyout');
-    newBookButton.classList.toggle('active-button');
-    darkModeSwitchDiv.classList.toggle('inactive-switch');
-    if (newBookButton.disabled) {
-        newBookButton.disabled = false;
-        darkModeSwitch.disabled = false;
+togglePopup() {
+
+    //clear form
+    this.addBookForm.reset();
+
+    this.popUp.classList.toggle('visible-pop-up');
+    this.body.classList.toggle('greyout');
+    this.newBookButton.classList.toggle('active-button');
+    this.darkModeSwitchDiv.classList.toggle('inactive-switch');
+    if (this.newBookButton.disabled) {
+        this.newBookButton.disabled = false;
+        this.darkModeSwitch.disabled = false;
     } else {
-        newBookButton.disabled = true;
-        darkModeSwitch.disabled = true;
+        this.newBookButton.disabled = true;
+        this.darkModeSwitch.disabled = true;
     }
 }
 
-function addAllListeners() {
+addAllListeners() {
     //change to dark mode with button
-    darkModeSwitch.addEventListener('click', () => {
-        root.classList.toggle("dark")
+    this.darkModeSwitch.addEventListener('click', () => {
+        this.root.classList.toggle("dark")
     });
 
 
     //show popup when pressing "+" button
-    newBookButton.addEventListener('click', this.togglePopup)
+    this.newBookButton.addEventListener('click', () => this.togglePopup())
 
 
     //add book to library with button on pop-up
-    addBookButton.addEventListener('click', (e) => {
+    this.addBookButton.addEventListener('click', (e) => {
         //prevents button from submitting
         e.preventDefault();
 
-        if (addBookForm.checkValidity()) {
+        if (this.addBookForm.checkValidity()) {
             //extract data from form and make it a FormData
-            const formData = new FormData(addBookForm);
+            const formData = new FormData(this.addBookForm);
             const addBookData = Object.fromEntries(formData.entries());
             //create book from data
             const newBook = Object.assign(new Book(), addBookData);
@@ -62,12 +65,13 @@ function addAllListeners() {
             const correctedBook = newBook.correctData();
 
             correctedBook.display();
-            togglePopup();
+            this.togglePopup();
             Book.myLibrary[correctedBook['title']] = correctedBook
         }
     })
 
-    closePopUpButton.addEventListener('click', () => this.togglePopup())
+    this.closePopUpButton.addEventListener('click', () => this.togglePopup())
+}
 }
 
 //Class for books
@@ -129,7 +133,7 @@ class Book {
         }
         this.addDeleteButton(bookDiv);
 
-        librarySection.prepend(bookDiv);
+        website.librarySection.prepend(bookDiv);
     }
 
     addDeleteButton(location) {
@@ -145,7 +149,7 @@ class Book {
 
     remove(book) {
         //remove from Dom
-        librarySection.removeChild(book);
+        website.librarySection.removeChild(book);
         //remove from myLibrary object
         delete Book.myLibrary[this['title']]
     }
@@ -185,6 +189,7 @@ const pedroParamo = new Book('Pedro Páramo', 'Juan Rulfo', 128, false).addToLib
 const razaCosmica = new Book('La Raza Cósmica', 'José Vasconcelos', 70, true).addToLibrary();
 const principles = new Book("The principles of Object-Oriented Javascript", 'Nicholas C. Zakas', 112, false).addToLibrary();
 
+const website = new DOM();
 
-displayAllBooks();
-addAllListeners();
+website.displayAllBooks();
+website.addAllListeners();

@@ -11,7 +11,7 @@
     /* For mobile phones: */
 
     #dark-mode-div {
-        top : 16vh;
+        top : 12vh;
 
     }
 
@@ -23,7 +23,7 @@
         background-color: var(--color-light);
         color: var(--color-text-book);
         position: absolute;
-        top: 10%;
+        bottom: 2%;
         left: 50%;
         /* transform: translate(-50%, 50%); */
         display: none;
@@ -31,7 +31,7 @@
     }
 
     #pop-up.visible-pop-up {
-        bottom: -50%;
+        bottom: -150%;
     }
 
     #page-body {
@@ -355,7 +355,7 @@ body #pop-up {
     background-color: var(--color-dark);
     color: var(--color-text-book);
     position: absolute;
-    bottom: 50%;
+    bottom: 25%;
     left: 50%;
     transform: translate(-50%, 50%);
     display: none;
