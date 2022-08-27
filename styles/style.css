@@ -23,7 +23,7 @@
         background-color: var(--color-light);
         color: var(--color-text-book);
         position: absolute;
-        bottom: 2%;
+        bottom: 102%;
         left: 50%;
         /* transform: translate(-50%, 50%); */
         display: none;
@@ -31,7 +31,7 @@
     }
 
     #pop-up.visible-pop-up {
-        bottom: -150%;
+        bottom: -100%;
     }
 
     #page-body {

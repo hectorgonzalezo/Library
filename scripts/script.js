@@ -1,78 +1,82 @@
 
-const DOM = class {
-root = document.querySelector('html');
-body = document.querySelector('#page-body');
-librarySection = document.querySelector('main');
-darkModeSwitch = document.querySelector('#dark-mode');
-darkModeSwitchDiv = document.querySelector('#dark-mode-switch-div');
-newBookButton = document.querySelector('#book-button');
-popUp = document.querySelector('#pop-up');
-addBookButton = document.querySelector('#add-book-button');
-closePopUpButton = document.querySelector('#close-pop-up');
-addBookForm = document.querySelector('#add-book-form');
+const website = (function () {
+    root = document.querySelector('html');
+    body = document.querySelector('#page-body');
+    librarySection = document.querySelector('main');
+    darkModeSwitch = document.querySelector('#dark-mode');
+    darkModeSwitchDiv = document.querySelector('#dark-mode-switch-div');
+    newBookButton = document.querySelector('#book-button');
+    popUp = document.querySelector('#pop-up');
+    addBookButton = document.querySelector('#add-book-button');
+    closePopUpButton = document.querySelector('#close-pop-up');
+    addBookForm = document.querySelector('#add-book-form');
 
 
-//displays all books in list
-displayAllBooks(library = Book.myLibrary) {
-    Object.keys(Book.myLibrary).forEach((book) => {
-        library[book].display();
-    }
-    )
-};
-
-
-togglePopup() {
-
-    //clear form
-    this.addBookForm.reset();
-
-    this.popUp.classList.toggle('visible-pop-up');
-    this.body.classList.toggle('greyout');
-    this.newBookButton.classList.toggle('active-button');
-    this.darkModeSwitchDiv.classList.toggle('inactive-switch');
-    if (this.newBookButton.disabled) {
-        this.newBookButton.disabled = false;
-        this.darkModeSwitch.disabled = false;
-    } else {
-        this.newBookButton.disabled = true;
-        this.darkModeSwitch.disabled = true;
-    }
-}
-
-addAllListeners() {
-    //change to dark mode with button
-    this.darkModeSwitch.addEventListener('click', () => {
-        this.root.classList.toggle("dark")
-    });
-
-
-    //show popup when pressing "+" button
-    this.newBookButton.addEventListener('click', () => this.togglePopup())
-
-
-    //add book to library with button on pop-up
-    this.addBookButton.addEventListener('click', (e) => {
-        //prevents button from submitting
-        e.preventDefault();
-
-        if (this.addBookForm.checkValidity()) {
-            //extract data from form and make it a FormData
-            const formData = new FormData(this.addBookForm);
-            const addBookData = Object.fromEntries(formData.entries());
-            //create book from data
-            const newBook = Object.assign(new Book(), addBookData);
-
-            const correctedBook = newBook.correctData();
-
-            correctedBook.display();
-            this.togglePopup();
-            Book.myLibrary[correctedBook['title']] = correctedBook
+    //displays all books in list
+    function displayAllBooks(library = Book.myLibrary) {
+        Object.keys(Book.myLibrary).forEach((book) => {
+            library[book].display();
         }
-    })
+        )
+    };
 
-    this.closePopUpButton.addEventListener('click', () => this.togglePopup())
+
+    function togglePopup() {
+
+        //clear form
+        addBookForm.reset();
+
+        popUp.classList.toggle('visible-pop-up');
+        body.classList.toggle('greyout');
+        newBookButton.classList.toggle('active-button');
+        darkModeSwitchDiv.classList.toggle('inactive-switch');
+        if (newBookButton.disabled) {
+            newBookButton.disabled = false;
+            darkModeSwitch.disabled = false;
+        } else {
+            newBookButton.disabled = true;
+            darkModeSwitch.disabled = true;
+        }
+    }
+
+    function addAllListeners() {
+        //change to dark mode with button
+        console.log(darkModeSwitch)
+        darkModeSwitch.addEventListener('click', () => {
+            root.classList.toggle("dark")
+        });
+
+
+        //show popup when pressing "+" button
+        newBookButton.addEventListener('click', togglePopup)
+
+
+        //add book to library with button on pop-up
+        addBookButton.addEventListener('click', (e) => {
+            //prevents button from submitting
+            e.preventDefault();
+
+            if (addBookForm.checkValidity()) {
+                //extract data from form and make it a FormData
+                const formData = new FormData(addBookForm);
+                const addBookData = Object.fromEntries(formData.entries());
+                //create book from data
+                const newBook = Object.assign(new Book(), addBookData);
+
+                const correctedBook = newBook.correctData();
+
+                correctedBook.display();
+                togglePopup();
+                Book.myLibrary[correctedBook['title']] = correctedBook
+            }
+        })
+
+        closePopUpButton.addEventListener('click', togglePopup)
+    };
+
+    return { librarySection, displayAllBooks, addAllListeners }
 }
-}
+)();
 
 //Class for books
 class Book {
@@ -189,7 +193,6 @@ const pedroParamo = new Book('Pedro Páramo', 'Juan Rulfo', 128, false).addToLib
 const razaCosmica = new Book('La Raza Cósmica', 'José Vasconcelos', 70, true).addToLibrary();
 const principles = new Book("The principles of Object-Oriented Javascript", 'Nicholas C. Zakas', 112, false).addToLibrary();
 
-const website = new DOM();
 
 website.displayAllBooks();
 website.addAllListeners();
