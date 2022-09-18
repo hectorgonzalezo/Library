@@ -7,7 +7,7 @@ Books can be updated, added or removed.
 
 This involves using Javascript Objects, reviewing concepts like inheritance and prototypes.
 
-Build as part of "The Odin Project" curriculum.
+Built as part of "The Odin Project" curriculum.
 
 ## Live Preview
 
